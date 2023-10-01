@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/common/extension/custom_theme_extension.dart';
 
-import 'package:whatsapp_clone/common/utils/my_colors.dart';
 import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/features/welcome/widgets/language_button.dart';
 import 'package:whatsapp_clone/features/welcome/widgets/privacy_and_terms.dart';
@@ -21,9 +20,11 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundDark,
       body: Column(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -66,5 +67,3 @@ class WelcomePage extends StatelessWidget {
     );
   }
 }
-
-

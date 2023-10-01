@@ -3,11 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/common/utils/my_colors.dart';
 
 extension ExtendedTheme on BuildContext {
-  CustomThemeExtension get theme =>
-      Theme.of(this).extension<CustomThemeExtension>()!;
+  CustomThemeExtension get theme {
+    return Theme.of(this).extension<CustomThemeExtension>()!;
+  }
 }
 
 class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
+  final Color? circleImageColor;
+  final Color? greyColor;
+  final Color? blueColor;
+  final Color? langBtnBgColor;
+  final Color? langBtnHighlightColor;
+  const CustomThemeExtension({
+    this.circleImageColor,
+    this.greyColor,
+    this.blueColor,
+    this.langBtnBgColor,
+    this.langBtnHighlightColor,
+  });
+
   static const lightMode = CustomThemeExtension(
     circleImageColor: Color(0xFF25D366),
     greyColor: MyColors.greyLight,
@@ -23,19 +37,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     langBtnBgColor: Color(0xFF182229),
     langBtnHighlightColor: Color(0xFF09141A),
   );
-
-  final Color? circleImageColor;
-  final Color? greyColor;
-  final Color? blueColor;
-  final Color? langBtnBgColor;
-  final Color? langBtnHighlightColor;
-  const CustomThemeExtension({
-    this.circleImageColor,
-    this.greyColor,
-    this.blueColor,
-    this.langBtnBgColor,
-    this.langBtnHighlightColor,
-  });
 
   @override
   ThemeExtension<CustomThemeExtension> copyWith({
