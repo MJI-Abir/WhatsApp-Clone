@@ -47,7 +47,6 @@ class WelcomePage extends StatelessWidget {
                 const Text(
                   'Welcome to WhatsApp',
                   style: TextStyle(
-                    color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),

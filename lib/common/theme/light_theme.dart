@@ -6,7 +6,7 @@ ThemeData lightTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     scaffoldBackgroundColor: MyColors.backgroundLight,
-    backgroundColor: MyColors.backgroundLight,
+    colorScheme: const ColorScheme.light(background: MyColors.backgroundLight),
     extensions: [
       CustomThemeExtension.lightMode,
     ],
@@ -14,9 +14,18 @@ ThemeData lightTheme() {
       style: ElevatedButton.styleFrom(
         backgroundColor: MyColors.greenLight,
         foregroundColor: MyColors.backgroundLight,
-        splashFactory: NoSplash.splashFactory,
+        splashFactory: InkSparkle.splashFactory,
         elevation: 0,
         shadowColor: Colors.transparent,
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: MyColors.backgroundLight,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
       ),
     ),
   );

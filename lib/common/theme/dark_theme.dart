@@ -6,7 +6,7 @@ ThemeData darkTheme() {
   final ThemeData base = ThemeData.dark();
   return base.copyWith(
     scaffoldBackgroundColor: MyColors.backgroundDark,
-    backgroundColor: MyColors.backgroundDark,
+    colorScheme: const ColorScheme.light(background: MyColors.backgroundDark),
     extensions: [
       CustomThemeExtension.darkMode,
     ],
@@ -14,9 +14,18 @@ ThemeData darkTheme() {
       style: ElevatedButton.styleFrom(
         backgroundColor: MyColors.greenDark,
         foregroundColor: MyColors.backgroundDark,
-        splashFactory: NoSplash.splashFactory,
+        splashFactory: InkSplash.splashFactory,
         elevation: 0,
         shadowColor: Colors.transparent,
+      ),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: MyColors.greyBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
       ),
     ),
   );
