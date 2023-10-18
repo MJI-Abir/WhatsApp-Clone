@@ -80,7 +80,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   color: context.theme.greyColor,
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 20,
                 ),
                 Text(
                   'Resend message',
