@@ -35,5 +35,11 @@ ThemeData lightTheme() {
         ),
       ),
     ),
+    dialogBackgroundColor: MyColors.backgroundLight,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
   );
 }
