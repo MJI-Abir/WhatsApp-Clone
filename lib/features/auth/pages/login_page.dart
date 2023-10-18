@@ -5,6 +5,7 @@ import 'package:whatsapp_clone/common/helper/show_alert_dialog.dart';
 import 'package:whatsapp_clone/common/utils/my_colors.dart';
 import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/common/widgets/custom_icon_button.dart';
+import 'package:whatsapp_clone/features/auth/pages/verification_page.dart';
 import 'package:whatsapp_clone/features/auth/widgets/custom_text_filed.dart';
 
 class LoginPage extends StatefulWidget {
@@ -175,7 +176,6 @@ class _LoginPageState extends State<LoginPage> {
 
   void sendCodeToPhone() {
     final phoneNumber = phoneNumberController.text;
-    final countryCode = countryCodeController.text;
     final countryName = countryNameController.text;
 
     if (phoneNumber.isEmpty) {
@@ -198,6 +198,13 @@ class _LoginPageState extends State<LoginPage> {
             'The phone number you entered is too long for the country: $countryName',
       );
       return;
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return const VerificationPage();
+        }),
+      );
     }
   }
 }
