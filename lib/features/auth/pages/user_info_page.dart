@@ -4,7 +4,11 @@ import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/features/auth/widgets/custom_text_filed.dart';
 
 class UserInfoPage extends StatefulWidget {
-  const UserInfoPage({super.key});
+  const UserInfoPage({
+    super.key,
+    required this.profileImageUrl,
+  });
+  final String profileImageUrl;
 
   @override
   State<UserInfoPage> createState() => _UserInfoPageState();

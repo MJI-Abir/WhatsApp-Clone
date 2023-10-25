@@ -202,7 +202,10 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return const VerificationPage();
+          return const VerificationPage(
+            smsCodeId: 'hello',
+            phoneNumber: 'hello number',
+          );
         }),
       );
     }

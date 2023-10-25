@@ -4,7 +4,13 @@ import 'package:whatsapp_clone/common/widgets/custom_icon_button.dart';
 import 'package:whatsapp_clone/features/auth/widgets/custom_text_filed.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({super.key});
+  const VerificationPage({
+    super.key,
+    required this.smsCodeId,
+    required this.phoneNumber,
+  });
+  final String smsCodeId;
+  final String phoneNumber;
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
