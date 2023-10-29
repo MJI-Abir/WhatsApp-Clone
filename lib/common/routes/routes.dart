@@ -35,9 +35,7 @@ class Routes {
       case userInfo:
         final String? profileImageUrl = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (context) => const UserInfoPage(
-            profileImageUrl: 'profileImageUrl',
-          ),
+          builder: (context) => const UserInfoPage(),
         );
       default:
         return MaterialPageRoute(

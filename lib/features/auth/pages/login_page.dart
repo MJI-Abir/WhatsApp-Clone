@@ -202,6 +202,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       );
       return;
     }
+    
     //request a verification code
     ref.read(authContollerProvider).sendSmsCode(
         context: context, phoneNumber: '+$countryCode$phoneNumber');

@@ -43,7 +43,7 @@ class AuthRepository {
         Routes.userInfo,
         (route) => false,
       );
-    } on FirebaseAuth catch (e) {
+    } on FirebaseException catch (e) {
       showAlertDialog(context: context, message: e.toString());
     }
   }
@@ -74,7 +74,7 @@ class AuthRepository {
           },
           codeAutoRetrievalTimeout: (String smsCodeId) {});
     } on FirebaseException catch (e) {
-      Navigator.pop(context);
+      Navigator.of(context).pop();
       showAlertDialog(context: context, message: e.toString());
     }
   }
