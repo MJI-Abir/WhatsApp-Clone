@@ -16,38 +16,38 @@ WhatsApp Clone is a messaging app that replicates the core features of the popul
 
 1. Clone the repository to your local machine:
 
-```
-git clone https://github.com/yourusername/whatsapp-clone.git
-```
+  ```
+  git clone https://github.com/yourusername/whatsapp-clone.git
+  ```
 
 1. Install the necessary dependencies:
-```
-cd whatsapp-clone
-flutter pub get
-```
+  ```
+  cd whatsapp-clone
+  flutter pub get
+  ```
 
 1. Run the app on an emulator or physical device:
-```
-flutter run
-```
+  ```
+  flutter run
+  ```
 
 1. Configuration
-- Update the Firebase configuration in the google-services.json or GoogleService-Info.plist files for Android and iOS respectively.
-- Set up your Firebase project for authentication, real-time database, and cloud functions.
-- Update the server URL for push notifications (e.g., FCM or a custom server).
+  - Update the Firebase configuration in the google-services.json or GoogleService-Info.plist files for Android and iOS respectively.
+  - Set up your Firebase project for authentication, real-time database, and cloud functions.
+  - Update the server URL for push notifications (e.g., FCM or a custom server).
 
 1. Usage
-- Launch the app and sign up or log in with your phone number.
-- Add contacts and start chatting.
-- Make voice and video calls by selecting a contact and choosing the call option.
-- Share media by tapping the attachment icon in the chat interface.
-- Create or join group chats.
-- Customize your profile settings.
+  - Launch the app and sign up or log in with your phone number.
+  - Add contacts and start chatting.
+  - Make voice and video calls by selecting a contact and choosing the call option.
+  - Share media by tapping the attachment icon in the chat interface.
+  - Create or join group chats.
+  - Customize your profile settings.
 
 1. Contributing
-- Contributions are welcome! Please follow these steps:
+  - Contributions are welcome! Please follow these steps:
 
-  - Fork the repository.
-  - Create a new branch for your feature or bug fix.
-  - Make your changes and commit them with clear messages.
-  - Create a pull request, explaining the changes you made.
+    - Fork the repository.
+    - Create a new branch for your feature or bug fix.
+    - Make your changes and commit them with clear messages.
+    - Create a pull request, explaining the changes you made.
