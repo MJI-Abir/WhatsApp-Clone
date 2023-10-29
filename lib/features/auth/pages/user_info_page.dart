@@ -1,8 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp_clone/common/extension/custom_theme_extension.dart';
+import 'package:whatsapp_clone/common/helper/show_alert_dialog.dart';
 import 'package:whatsapp_clone/common/utils/my_colors.dart';
 import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/common/widgets/custom_icon_button.dart';
@@ -21,6 +26,7 @@ class UserInfoPage extends ConsumerStatefulWidget {
 
 class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   File? imageCamera;
+  Uint8List? imageGallery;
 
   late TextEditingController userNameController;
 
@@ -58,20 +64,25 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 children: [
                   const SizedBox(width: 20),
                   imagePickerIcon(
-                    onTap: () {},
+                    onTap: pickImageFromCamera,
                     icon: Icons.camera_alt_rounded,
                     text: 'Camera',
                   ),
                   const SizedBox(width: 15),
                   imagePickerIcon(
-                    onTap: () {
+                    onTap: () async {
                       Navigator.pop(context);
-                      Navigator.push(
+                      final image = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ImagePickerPage(),
                         ),
                       );
+                      if (image == null) return;
+                      setState(() {
+                        imageGallery = image;
+                        imageCamera = null;
+                      });
                     },
                     text: 'Gallery',
                     icon: Icons.photo_camera_back_rounded,
@@ -82,6 +93,62 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
             ],
           );
         });
+  }
+
+  pickImageFromCamera() async {
+    try {
+      Navigator.pop(context);
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      setState(() {
+        imageCamera = File(image!.path);
+        imageGallery = null;
+      });
+    } catch (e) {
+      showAlertDialog(
+        context: context,
+        message: e.toString(),
+      );
+    }
+  }
+
+  imagePickerIcon({
+    required VoidCallback onTap,
+    required IconData icon,
+    required String text,
+  }) {
+    return Column(
+      children: [
+        CustomIconButton(
+          onPressed: onTap,
+          icon: icon,
+          iconColor: MyColors.greenDark,
+          minWidth: 50,
+          border: Border.all(
+            color: context.theme.greyColor!.withOpacity(0.2),
+            width: 1,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          text,
+          style: TextStyle(
+            color: context.theme.greyColor,
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    userNameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    userNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -117,13 +184,28 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.theme.photoIconBgColor,
+                  border: Border.all(
+                    color: imageCamera == null && imageGallery == null
+                        ? Colors.transparent
+                        : context.theme.greyColor!.withOpacity(.4),
+                  ),
+                  image: imageCamera != null || imageGallery != null
+                      ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: imageGallery != null
+                              ? MemoryImage(imageGallery!) as ImageProvider
+                              : FileImage(imageCamera!),
+                        )
+                      : null,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 3, right: 3),
                   child: Icon(
                     Icons.add_a_photo_rounded,
                     size: 48,
-                    color: context.theme.photoIconColor,
+                    color: imageCamera == null && imageGallery == null
+                        ? context.theme.photoIconColor
+                        : Colors.transparent,
                   ),
                 ),
               ),
@@ -159,34 +241,6 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         buttonWidth: 90,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-  }
-
-  imagePickerIcon({
-    required VoidCallback onTap,
-    required IconData icon,
-    required String text,
-  }) {
-    return Column(
-      children: [
-        CustomIconButton(
-          onPressed: onTap,
-          icon: icon,
-          iconColor: MyColors.greenDark,
-          minWidth: 50,
-          border: Border.all(
-            color: context.theme.greyColor!.withOpacity(0.2),
-            width: 1,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(
-          text,
-          style: TextStyle(
-            color: context.theme.greyColor,
-          ),
-        ),
-      ],
     );
   }
 }

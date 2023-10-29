@@ -14,8 +14,17 @@ class ImagePickerPage extends StatefulWidget {
 
 class _ImagePickerPageState extends State<ImagePickerPage> {
   List<Widget> imageList = [];
+  int currentPage = 0;
+  int? lastPage;
+
+  handleScrollEvent(ScrollNotification scroll) {
+    if (scroll.metrics.pixels / scroll.metrics.maxScrollExtent <= .33) return;
+    if (currentPage == lastPage) return;
+    fetchAllImages();
+  }
 
   fetchAllImages() async {
+    lastPage = currentPage;
     final permission = await PhotoManager.requestPermissionExtend();
     if (!permission.isAuth) {
       return PhotoManager.openSetting();
@@ -72,6 +81,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
 
     setState(() {
       imageList.addAll(temp);
+      currentPage++;
     });
   }
 
@@ -105,13 +115,20 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-          ),
-          itemBuilder: (_, index) {
-            return imageList[index];
+        child: NotificationListener(
+          onNotification: (ScrollNotification scroll) {
+            handleScrollEvent(scroll);
+            return true;
           },
+          child: GridView.builder(
+            itemCount: imageList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (_, index) {
+              return imageList[index];
+            },
+          ),
         ),
       ),
     );
