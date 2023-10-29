@@ -20,23 +20,23 @@ WhatsApp Clone is a messaging app that replicates the core features of the popul
   git clone https://github.com/yourusername/whatsapp-clone.git
   ```
 
-1. Install the necessary dependencies:
+2. Install the necessary dependencies:
   ```
   cd whatsapp-clone
   flutter pub get
   ```
 
-1. Run the app on an emulator or physical device:
+3. Run the app on an emulator or physical device:
   ```
   flutter run
   ```
 
-1. Configuration
+4. Configuration
   - Update the Firebase configuration in the google-services.json or GoogleService-Info.plist files for Android and iOS respectively.
   - Set up your Firebase project for authentication, real-time database, and cloud functions.
   - Update the server URL for push notifications (e.g., FCM or a custom server).
 
-1. Usage
+5. Usage
   - Launch the app and sign up or log in with your phone number.
   - Add contacts and start chatting.
   - Make voice and video calls by selecting a contact and choosing the call option.
@@ -44,7 +44,7 @@ WhatsApp Clone is a messaging app that replicates the core features of the popul
   - Create or join group chats.
   - Customize your profile settings.
 
-1. Contributing
+6. Contributing
   - Contributions are welcome! Please follow these steps:
 
     - Fork the repository.
