@@ -179,7 +179,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final phoneNumber = phoneNumberController.text;
     final countryName = countryNameController.text;
     final countryCode = countryCodeController.text;
-    print(phoneNumber);
 
     if (phoneNumber.isEmpty) {
       showAlertDialog(
