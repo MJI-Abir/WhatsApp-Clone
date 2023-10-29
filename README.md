@@ -17,7 +17,7 @@ WhatsApp Clone is a messaging app that replicates the core features of the popul
 1. Clone the repository to your local machine:
 
   ```
-  git clone https://github.com/yourusername/whatsapp-clone.git
+  git clone https://github.com/MJI-Abir/Whatsapp-Clone.git
   ```
 
 2. Install the necessary dependencies:
