@@ -33,7 +33,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      home: const WelcomePage(),
+      home: const UserInfoPage(),
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }

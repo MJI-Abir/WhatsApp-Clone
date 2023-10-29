@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsapp_clone/common/extension/custom_theme_extension.dart';
+import 'package:whatsapp_clone/common/utils/my_colors.dart';
 import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/common/widgets/custom_icon_button.dart';
 import 'package:whatsapp_clone/common/widgets/short_h_bar.dart';
+import 'package:whatsapp_clone/features/auth/pages/image_picker_page.dart';
 import 'package:whatsapp_clone/features/auth/widgets/custom_text_filed.dart';
 
 class UserInfoPage extends ConsumerStatefulWidget {
@@ -47,7 +49,36 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
                   ),
                   const SizedBox(width: 15),
                 ],
-              )
+              ),
+              Divider(
+                color: context.theme.greyColor!.withOpacity(.3),
+              ),
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                  const SizedBox(width: 20),
+                  imagePickerIcon(
+                    onTap: () {},
+                    icon: Icons.camera_alt_rounded,
+                    text: 'Camera',
+                  ),
+                  const SizedBox(width: 15),
+                  imagePickerIcon(
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ImagePickerPage(),
+                        ),
+                      );
+                    },
+                    text: 'Gallery',
+                    icon: Icons.photo_camera_back_rounded,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15),
             ],
           );
         });
@@ -79,18 +110,21 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
               ),
             ),
             const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.all(26),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: context.theme.photoIconBgColor,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 3, right: 3),
-                child: Icon(
-                  Icons.add_a_photo_rounded,
-                  size: 48,
-                  color: context.theme.photoIconColor,
+            GestureDetector(
+              onTap: imagePickerTypeBottomSheet,
+              child: Container(
+                padding: const EdgeInsets.all(26),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: context.theme.photoIconBgColor,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 3, right: 3),
+                  child: Icon(
+                    Icons.add_a_photo_rounded,
+                    size: 48,
+                    color: context.theme.photoIconColor,
+                  ),
                 ),
               ),
             ),
@@ -125,6 +159,34 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         buttonWidth: 90,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  imagePickerIcon({
+    required VoidCallback onTap,
+    required IconData icon,
+    required String text,
+  }) {
+    return Column(
+      children: [
+        CustomIconButton(
+          onPressed: onTap,
+          icon: icon,
+          iconColor: MyColors.greenDark,
+          minWidth: 50,
+          border: Border.all(
+            color: context.theme.greyColor!.withOpacity(0.2),
+            width: 1,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          text,
+          style: TextStyle(
+            color: context.theme.greyColor,
+          ),
+        ),
+      ],
     );
   }
 }
