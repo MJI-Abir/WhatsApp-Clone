@@ -12,6 +12,7 @@ import 'package:whatsapp_clone/common/utils/my_colors.dart';
 import 'package:whatsapp_clone/common/widgets/custom_elevated_button.dart';
 import 'package:whatsapp_clone/common/widgets/custom_icon_button.dart';
 import 'package:whatsapp_clone/common/widgets/short_h_bar.dart';
+import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 import 'package:whatsapp_clone/features/auth/pages/image_picker_page.dart';
 import 'package:whatsapp_clone/features/auth/widgets/custom_text_filed.dart';
 
@@ -29,6 +30,28 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
   Uint8List? imageGallery;
 
   late TextEditingController userNameController;
+
+  saveUserDataToFirebase() {
+    String username = userNameController.text;
+    if (username.isEmpty) {
+      return showAlertDialog(
+        context: context,
+        message: 'Please enter a username',
+      );
+    } else if (username.length < 3 || username.length > 20) {
+      return showAlertDialog(
+        context: context,
+        message: 'A username length should be between 3 to 20',
+      );
+    }
+
+    ref.read(authContollerProvider).saveUserInfoToFirestore(
+          username: username,
+          profileImage: imageCamera ?? imageGallery ?? '',
+          context: context,
+          mounted: mounted,
+        );
+  }
 
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
@@ -213,8 +236,9 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
             const SizedBox(height: 40),
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: CustomTextField(
+                    controller: userNameController,
                     hintText: 'Type your name here',
                     textAlign: TextAlign.start,
                     autoFocus: true,
@@ -236,7 +260,7 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
         ),
       ),
       floatingActionButton: CustomElevatedButton(
-        onPressed: () {},
+        onPressed: saveUserDataToFirebase,
         text: 'NEXT',
         buttonWidth: 90,
       ),

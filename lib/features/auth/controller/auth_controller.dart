@@ -15,6 +15,21 @@ class AuthController {
 
   AuthController({required this.authRepository, required this.ref});
 
+  saveUserInfoToFirestore({
+    required String username,
+    required var profileImage,
+    required BuildContext context,
+    required bool mounted,
+  }) async {
+    authRepository.saveUserInfoToFirestore(
+      username: username,
+      profileImage: profileImage,
+      context: context,
+      ref: ref,
+      mounted: mounted,
+    );
+  }
+
   void verifySmsCode({
     required BuildContext context,
     required String smsCodeId,
@@ -22,10 +37,11 @@ class AuthController {
     required bool mounted,
   }) {
     authRepository.verifySmsCode(
-        context: context,
-        smsCodeId: smsCodeId,
-        smsCode: smsCode,
-        mounted: mounted);
+      context: context,
+      smsCodeId: smsCodeId,
+      smsCode: smsCode,
+      mounted: mounted,
+    );
   }
 
   void sendSmsCode({
