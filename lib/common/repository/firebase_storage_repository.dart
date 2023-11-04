@@ -27,3 +27,22 @@ class FirebaseStorageRepository {
     return imageUrl;
   }
 }
+
+
+
+/* ********** upload files ********** */
+
+// You can find the following instructions in the firebase documentation. Link : https://firebase.google.com/docs/storage/flutter/start?authuser=0
+
+  /*
+  1. Create a reference to upload, download, or delete a file with Firebaase.instance.ref()
+  2. Create a child reference
+      -> uploadTask now points to path ref = 'profileImage/$uid'
+  3. call the putFile(), putString(), or putData() method to upload the file to Cloud Storage
+  4. After uploading, you can get a URL to download the file by calling the getDownloadUrl() method on the Reference
+
+  5. Optional : Pause, resume, and cancel uploads for large files (see the documentation)
+  6. Optional : Monitor upload progress (see the documentation)
+  7. Optional : Error handling (see the documentation)
+
+  */

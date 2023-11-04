@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsapp_clone/common/models/user_model.dart';
 import 'package:whatsapp_clone/features/auth/repository/auth_repository.dart';
 
 final authContollerProvider = Provider(
@@ -14,6 +15,11 @@ class AuthController {
   final ProviderRef ref;
 
   AuthController({required this.authRepository, required this.ref});
+
+  Future<UserModel?> getCurrentUserInfo() async {
+    UserModel? user = await authRepository.getCurrentUserInfo();
+    return user;
+  }
 
   saveUserInfoToFirestore({
     required String username,

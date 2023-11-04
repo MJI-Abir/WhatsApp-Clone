@@ -55,67 +55,68 @@ class _UserInfoPageState extends ConsumerState<UserInfoPage> {
 
   imagePickerTypeBottomSheet() {
     return showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const ShortHBar(),
-              Row(
-                children: [
-                  const SizedBox(width: 20),
-                  const Text(
-                    'Profile photo',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
+      context: context,
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const ShortHBar(),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                const Text(
+                  'Profile photo',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
                   ),
-                  const Spacer(),
-                  CustomIconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icons.close,
-                  ),
-                  const SizedBox(width: 15),
-                ],
-              ),
-              Divider(
-                color: context.theme.greyColor!.withOpacity(.3),
-              ),
-              const SizedBox(height: 5),
-              Row(
-                children: [
-                  const SizedBox(width: 20),
-                  imagePickerIcon(
-                    onTap: pickImageFromCamera,
-                    icon: Icons.camera_alt_rounded,
-                    text: 'Camera',
-                  ),
-                  const SizedBox(width: 15),
-                  imagePickerIcon(
-                    onTap: () async {
-                      Navigator.pop(context);
-                      final image = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ImagePickerPage(),
-                        ),
-                      );
-                      if (image == null) return;
-                      setState(() {
-                        imageGallery = image;
-                        imageCamera = null;
-                      });
-                    },
-                    text: 'Gallery',
-                    icon: Icons.photo_camera_back_rounded,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-            ],
-          );
-        });
+                ),
+                const Spacer(),
+                CustomIconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icons.close,
+                ),
+                const SizedBox(width: 15),
+              ],
+            ),
+            Divider(
+              color: context.theme.greyColor!.withOpacity(.3),
+            ),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                imagePickerIcon(
+                  onTap: pickImageFromCamera,
+                  icon: Icons.camera_alt_rounded,
+                  text: 'Camera',
+                ),
+                const SizedBox(width: 15),
+                imagePickerIcon(
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final image = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImagePickerPage(),
+                      ),
+                    );
+                    if (image == null) return;
+                    setState(() {
+                      imageGallery = image;
+                      imageCamera = null;
+                    });
+                  },
+                  text: 'Gallery',
+                  icon: Icons.photo_camera_back_rounded,
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+          ],
+        );
+      },
+    );
   }
 
   pickImageFromCamera() async {

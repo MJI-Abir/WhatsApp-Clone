@@ -5,6 +5,8 @@ import 'package:whatsapp_clone/common/theme/dark_theme.dart';
 import 'package:whatsapp_clone/common/theme/light_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:whatsapp_clone/features/auth/repository/auth_repository.dart';
+import 'package:whatsapp_clone/features/home/pages/home_page.dart';
 import 'package:whatsapp_clone/features/welcome/pages/welcome_page.dart';
 import 'firebase_options.dart';
 
@@ -23,16 +25,31 @@ void main() async {
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      home: const WelcomePage(),
+      home: ref.watch(userInfoAuthProvider).when(
+        data: (user) {
+          if (user == null) return const WelcomePage();
+          return const HomePage();
+        },
+        error: (error, trace) {
+          return const Scaffold(
+            body: Center(
+              child: Text('Something went wrong'),
+            ),
+          );
+        },
+        loading: () {
+          return const SizedBox();
+        },
+      ),
       onGenerateRoute: Routes.onGenerateRoute,
     );
   }

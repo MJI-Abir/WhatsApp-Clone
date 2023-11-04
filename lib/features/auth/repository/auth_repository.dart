@@ -8,6 +8,7 @@ import 'package:whatsapp_clone/common/helper/show_alert_dialog.dart';
 import 'package:whatsapp_clone/common/models/user_model.dart';
 import 'package:whatsapp_clone/common/repository/firebase_storage_repository.dart';
 import 'package:whatsapp_clone/common/routes/routes.dart';
+import 'package:whatsapp_clone/features/auth/controller/auth_controller.dart';
 
 final authRepositoryProvider = Provider(
   (ref) {
@@ -18,6 +19,11 @@ final authRepositoryProvider = Provider(
   },
 );
 
+final userInfoAuthProvider = FutureProvider((ref) {
+  final authController = ref.watch(authContollerProvider);
+  return authController.getCurrentUserInfo();
+});
+
 class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
@@ -26,6 +32,15 @@ class AuthRepository {
     required this.auth,
     required this.firestore,
   });
+
+  Future<UserModel?> getCurrentUserInfo() async {
+    UserModel? user;
+    final userInfo =
+        await firestore.collection('users').doc(auth.currentUser?.uid).get();
+    if (userInfo.data() == null) return user;
+    user = UserModel.fromMap(userInfo.data()!);
+    return user;
+  }
 
   saveUserInfoToFirestore({
     required String username,
