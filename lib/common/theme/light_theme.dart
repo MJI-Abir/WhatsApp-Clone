@@ -12,10 +12,19 @@ ThemeData lightTheme() {
       CustomThemeExtension.lightMode,
     ],
     appBarTheme: const AppBarTheme(
+      backgroundColor: MyColors.greenLight,
       titleTextStyle: TextStyle(fontSize: 18),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
+      ),
+    ),
+    tabBarTheme: const TabBarTheme(
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(
+          color: Colors.white,
+          width: 2,
+        ),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -41,6 +50,10 @@ ThemeData lightTheme() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: MyColors.greenDark,
+      foregroundColor: Colors.white,
     ),
   );
 }
